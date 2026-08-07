@@ -1065,10 +1065,15 @@
 
         if (data.status === 'blocked') {
           totalBlocked++;
-          if (data.category === "PROMPT_INJECTION") promptInjectionCount++;
+          const cat = (data.category || "prompt_injection").toLowerCase();
+          if (cat.includes("canary") || cat.includes("leak")) {
+            passcodeCount++;
+          } else {
+            promptInjectionCount++;
+          }
 
           addTerminalLog("BLOCK", `Threat Blocked! Category: ${data.category} | Score: ${data.threat_score}`);
-          recordThreatLog(data.category || "PROMPT_INJECTION", data.threat_score || 0.95);
+          recordThreatLog(data.category || "prompt_injection", data.threat_score || 0.95);
 
           chatView.innerHTML += `
             <div class="msg-row assistant">
@@ -1078,6 +1083,16 @@
                 <div style="font-size: 11px; margin-top: 6px; opacity: 0.8;">
                   Threat Category: ${data.category} | Threat Score: ${data.threat_score}
                 </div>
+              </div>
+            </div>
+          `;
+        } else if (data.status === 'error') {
+          addTerminalLog("ERROR", `Middleware Error: ${data.reply || 'Unknown'}`);
+          chatView.innerHTML += `
+            <div class="msg-row assistant">
+              <div class="blocked-card">
+                <div class="blocked-header">❌ Middleware Response Error</div>
+                ${escapeHtml(data.reply)}
               </div>
             </div>
           `;

@@ -106,12 +106,26 @@ async def chat_endpoint(req: ChatRequest):
                 if resp.status_code == 422:
                     # Security Engine Blocked Attack!
                     error_detail = data.get("detail", {})
+                    if not isinstance(error_detail, dict):
+                        error_detail = {}
                     return {
                         "mode": "protected",
                         "status": "blocked",
                         "reply": error_detail.get("message", "Request blocked by Security Engine."),
                         "threat_score": error_detail.get("threat_score", 0.95),
-                        "category": error_detail.get("category", "PROMPT_INJECTION"),
+                        "category": error_detail.get("category", "prompt_injection"),
+                        "protected": True,
+                        "session_id": req.session_id,
+                    }
+
+                if isinstance(data, dict) and data.get("error") == "CanaryLeakageException":
+                    # Canary Leakage Blocked Attack!
+                    return {
+                        "mode": "protected",
+                        "status": "blocked",
+                        "reply": data.get("message", "A system integrity violation was detected. The response has been suppressed."),
+                        "threat_score": 0.98,
+                        "category": "canary_leakage",
                         "protected": True,
                         "session_id": req.session_id,
                     }
