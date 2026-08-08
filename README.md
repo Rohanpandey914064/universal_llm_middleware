@@ -1,4 +1,4 @@
-# 🛡️ Universal LLM Middleware (`universal_llm_middleware`)
+#  Universal LLM Middleware (`universal_llm_middleware`)
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111%2B-009688.svg)](https://fastapi.tiangolo.com/)
@@ -10,7 +10,7 @@
 
 ---
 
-## 🌟 Key Architectural Features
+##  Key Architectural Features
 
 `universal_llm_middleware` sits transparently between your applications and upstream LLM providers (Groq, OpenAI, Anthropic, Ollama). It enforces strict separation of concerns across three independent engines:
 
@@ -22,8 +22,8 @@
 │                      UNIVERSAL LLM MIDDLEWARE                          │
 │                                                                        │
 │  ┌──────────────────┐  ┌─────────────────────┐  ┌───────────────────┐  │
-│  │ 🛡️ Security Engine│  │ 📚 History Manager  │  │ 🗜️ Compressor    │  │
-│  │ • Injection Guard│  │ • Zone Isolation   │  │ • Sliding Window  │  │
+│  │  Security Engine│   │  History Manager    │  │  Compressor       │  │
+│  │ • Injection Guard│  │ • Zone Isolation    │  │ • Sliding Window  │  │
 │  │ • PII Anonymizer │  │ • Session Store     │  │ • Drift Validator │  │
 │  │ • Canary Token   │  │ • TTL Eviction      │  │ • Token Budgeting │  │
 │  └──────────────────┘  └─────────────────────┘  └───────────────────┘  │
@@ -33,23 +33,23 @@
                    [ Upstream LLM (Groq / OpenAI) ]
 ```
 
-### 1. 🛡️ Security Engine
+### 1.  Security Engine
 - **Prompt Injection Guard**: Dual-layer heuristic inspection (19 rule patterns) with optional ONNX/DeBERTa model fallback to detect jailbreaks, role overrides, and instructions extraction attacks before hitting the LLM.
 - **PII Anonymization & Unmasking**: Automatic masking of sensitive data (Emails, Phone Numbers, Credit Cards, API Keys) via Regex & spaCy NER prior to upstream dispatch, with zero-leakage round-trip unmasking.
 - **Canary Token Audit**: Injects unique UUID4 canary tokens into system directives to verify that the LLM response does not leak internal prompt instructions.
 
-### 2. 📚 Conversational History Engine
+### 2.  Conversational History Engine
 - **Immutable Zone Isolation**: Enforces isolation between immutable system directives (`system`, `developer`) and mutable chat history (`user`, `assistant`). System directives are strictly protected from modification or token trimming.
 - **Thread-Safe Session Store**: TTL-based `InMemorySessionStore` with automatic background eviction daemon and per-session state isolation.
 
-### 3. 🗜️ Memory Compression Engine
+### 3.  Memory Compression Engine
 - **Pluggable Architecture**: Implements `BaseCompressor` slot for custom context reduction algorithms.
 - **Recency-Weighted Sliding Window**: Keeps recent turns untouched while compressing older turns within a configurable token budget.
 - **Semantic Drift Validation**: Uses TF-IDF cosine similarity to verify that compressed context preserves original intent (similarity threshold ≥ 0.90).
 
 ---
 
-## 🔌 Universal Integration Modes
+##  Universal Integration Modes
 
 The middleware provides **two universal integration modes**:
 
@@ -90,7 +90,7 @@ print(response.choices[0].message.content)
 
 ---
 
-## 🚀 Quick Start Guide
+##  Quick Start Guide
 
 ### 1. Prerequisites
 - Python 3.10+
@@ -137,7 +137,7 @@ Invoke-RestMethod -Method POST -Uri "http://localhost:8080/v1/chat/completions" 
 
 ---
 
-## 🧪 Demonstration Chatbot Application (`rohanAI`)
+##  Demonstration Chatbot Application (`rohanAI`)
 
 The repository includes a dedicated video-ready ChatGPT-style web application in `demo_chatbot/` to demonstrate the security before-and-after:
 
@@ -151,13 +151,13 @@ python server.py
 ```
 Open **`http://localhost:3000`** in your browser to interact with **rohanAI**.
 
-- **🔴 Direct Mode**: Bypasses middleware; prompt attacks successfully steal the hidden system passcode.
-- **🟢 Protected Mode**: Routes through middleware; attacks are instantly blocked with a `🚨 THREAT BLOCKED` alert banner, PII is masked, and sessions are securely persisted.
-- **📊 Middleware Inspector**: Live top-right dashboard showing session memory turns, compression ratio, and security metrics.
+- ** Direct Mode**: Bypasses middleware; prompt attacks successfully steal the hidden system passcode.
+- ** Protected Mode**: Routes through middleware; attacks are instantly blocked with a ` THREAT BLOCKED` alert banner, PII is masked, and sessions are securely persisted.
+- ** Middleware Inspector**: Live top-right dashboard showing session memory turns, compression ratio, and security metrics.
 
 ---
 
-## 🔬 Testing
+##  Testing
 
 Run the full pytest suite (99 test cases covering security, history, compression, pipeline, and FastAPI proxy):
 
@@ -167,7 +167,7 @@ pytest tests/ -v
 
 ---
 
-## 📁 Repository Structure
+##  Repository Structure
 
 ```
 universal_llm_middleware/
@@ -190,6 +190,6 @@ universal_llm_middleware/
 
 ---
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
