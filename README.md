@@ -1,4 +1,4 @@
-#  Universal LLM Middleware (`universal_llm_middleware`)
+#  Universal LLM Middleware
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111%2B-009688.svg)](https://fastapi.tiangolo.com/)
