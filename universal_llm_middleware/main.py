@@ -69,7 +69,7 @@ if __name__ == "__main__":
         "main:app",
         host=settings.host,
         port=settings.port,
-        workers=settings.workers,
+        reload=True,
         log_level=settings.log_level.lower(),
         access_log=True,
     )
