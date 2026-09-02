@@ -137,7 +137,7 @@ Invoke-RestMethod -Method POST -Uri "http://localhost:8080/v1/chat/completions" 
 
 ---
 
-##  Demonstration Chatbot Application (`rohanAI`)
+##  Demonstration Chatbot Application (`AI`)
 
 The repository includes a dedicated video-ready ChatGPT-style web application in `demo_chatbot/` to demonstrate the security before-and-after:
 
@@ -149,7 +149,7 @@ python main.py
 cd demo_chatbot
 python server.py
 ```
-Open **`http://localhost:3000`** in your browser to interact with **rohanAI**.
+Open **`http://localhost:3000`** in your browser to interact with **AI**.
 
 - ** Direct Mode**: Bypasses middleware; prompt attacks successfully steal the hidden system passcode.
 - ** Protected Mode**: Routes through middleware; attacks are instantly blocked with a ` THREAT BLOCKED` alert banner, PII is masked, and sessions are securely persisted.
@@ -184,7 +184,7 @@ universal_llm_middleware/
 ├── interfaces/
 │   ├── reverse_proxy.py           # FastAPI OpenAI-compatible HTTP Gateway
 │   └── sdk_wrapper.py             # Python SDK client interceptor
-├── demo_chatbot/                  # rohanAI Web Demo App
+├── demo_chatbot/                  # AI Web Demo App
 └── tests/                         # Complete test suite (99 tests)
 ```
 
