@@ -7,7 +7,6 @@
 [![Tests: 99 Passed](https://img.shields.io/badge/Tests-99%20Passed-brightgreen.svg)]()
 
 > A production-ready, modular AI Middleware that intercepts LLM requests and responses to enforce **zero-coupling security, context state management, and semantic memory compression**.
-
 ---
 
 ##  Key Architectural Features
